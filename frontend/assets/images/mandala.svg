@@ -1,0 +1,25 @@
+<!-- Decorative mandala SVG - free-form simple ornament for site decoration -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" aria-hidden="true" role="img">
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1">
+      <stop offset="0%" stop-color="#ffd6ea" />
+      <stop offset="100%" stop-color="#d6418e" />
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="90" fill="none" stroke="url(#g1)" stroke-opacity="0.25" stroke-width="6" />
+  <g stroke="url(#g1)" stroke-opacity="0.5" fill="none" stroke-width="2">
+    <circle cx="100" cy="100" r="64" />
+    <g transform="translate(100 100)">
+      <g stroke-linecap="round">
+        <path d="M0,-66 L12,-44" />
+        <path d="M0,-66 L-12,-44" />
+        <path d="M0,66 L12,44" />
+        <path d="M0,66 L-12,44" />
+        <path d="M66,0 L44,12" />
+        <path d="M66,0 L44,-12" />
+        <path d="M-66,0 L-44,12" />
+        <path d="M-66,0 L-44,-12" />
+      </g>
+    </g>
+  </g>
+</svg>

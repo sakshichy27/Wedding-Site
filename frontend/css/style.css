@@ -1,0 +1,424 @@
+/* Wedding site main styles */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Noto+Sans:wght@300;400;700&display=swap');
+
+:root{
+  --primary-pink:#d6418e;
+  --soft-pink:#ffd6ea;
+  --ivory:#fff8f0;
+  --glitter: linear-gradient(135deg, rgba(212,175,55,0.06), rgba(255,255,255,0.02));
+  --flower-color: rgba(255,192,203,0.12); /* replaced yellowish with soft pink */
+  --muted:#6b6b6b;
+  --max-width:1100px;
+}
+
+/* Decorative glitter overlay */
+.glitter-bg{
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,0.18) 0px, rgba(255,255,255,0.02) 1px),
+    radial-gradient(circle at 80% 80%, rgba(255,248,240,0.12) 0px, rgba(255,255,255,0.02) 1px); /* removed yellow tint */
+  background-size: 6px 6px, 10px 10px;
+}
+
+/* Soft floral halos for header/footer */
+.site-header{position:relative}
+.site-header::after,
+.footer::before{
+  content:'';
+  position:absolute;
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  opacity:0.95;
+  pointer-events:none;
+}
+.site-header::after{
+  right:1rem;
+  top:-28px;
+  background: radial-gradient(circle at 30% 30%, var(--flower-color), transparent 40%);
+  transform:rotate(12deg)
+}
+.footer::before{
+  left:1rem;
+  bottom:-28px;
+  background: radial-gradient(circle at 70% 70%, var(--flower-color), transparent 40%);
+  transform:rotate(-12deg)
+}
+
+*{box-sizing:border-box}
+
+body{
+  font-family:'Noto Sans',system-ui,Arial,sans-serif;
+  background:var(--ivory);
+  color:#222;
+  margin:0;
+  line-height:1.6;
+}
+
+.container{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:1rem;
+}
+
+/* Typography */
+h1,h2,h3{
+  font-family:'Playfair Display',serif;
+  color:var(--primary-pink);
+  margin:0 0 .6rem;
+}
+h1{font-size:2rem;font-weight:700}
+h2{font-size:1.4rem;font-weight:600}
+h3{font-size:1.1rem;font-weight:600}
+
+/* Skip link */
+.skip-link{
+  position:absolute;
+  left:-999px;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+.skip-link:focus{
+  left:1rem;
+  top:1rem;
+  width:auto;
+  height:auto;
+  padding:.6rem .8rem;
+  background:var(--primary-pink); /* replaced gold with pink */
+  color:#111;
+  border-radius:6px;
+  z-index:1000;
+}
+
+/* Digital Invite Video Box */
+.invite-video {
+  max-width: 900px;
+  margin: 2rem auto;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.invite-video video {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 80vh;
+  object-fit: contain;
+  background: #000;
+}
+
+/* Mandala */
+.decor-mandala{
+  display:inline-block;
+  opacity:.92;
+  margin-left:.6rem;
+}
+
+/* Focus */
+:focus{
+  outline:3px solid rgba(214,65,142,0.18);
+  outline-offset:3px;
+}
+:focus:not(:focus-visible){outline:none}
+
+/* ================= */
+/* Header / Nav BAR */
+/* ================= */
+.site-header{
+  background:linear-gradient(
+    180deg,
+    rgba(214,65,142,0.18),
+    rgba(214,65,142,0.08)
+  );
+  border-bottom:1px solid rgba(0,0,0,0.06);
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:.8rem 1rem;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+}
+
+.brand h1{
+  font-size:1.25rem;
+  margin:0;
+}
+
+.nav-links{
+  display:flex;
+  gap:.6rem;
+}
+
+.nav-links a{
+  color:var(--primary-pink);
+  text-decoration:none;
+  padding:.4rem .6rem;
+  border-radius:6px;
+}
+
+.nav-links a:hover{
+  background:rgba(214,65,142,0.12);
+}
+
+.menu-toggle{display:none}
+
+/* Hero */
+.hero{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding:3rem 1rem;
+}
+
+.hero .names{
+  font-size:2rem;
+  text-shadow:0 1px 0 rgba(255,255,255,0.6);
+}
+
+.hero .date{color:var(--muted)}
+
+.hero .ctas{
+  display:flex;
+  gap:.6rem;
+  flex-wrap:wrap;
+}
+
+.btn{
+  background:var(--primary-pink);
+  color:white;
+  padding:.6rem 1rem;
+  border-radius:8px;
+  text-decoration:none;
+  box-shadow:0 6px 14px rgba(214,65,142,0.08);
+}
+
+.btn.secondary{
+  background:transparent;
+  border:1px solid var(--primary-pink); /* replaced gold with pink */
+  color:var(--primary-pink);
+}
+
+.hero.glitter-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero.glitter-bg::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle, rgba(255, 192, 203,0.3) 0%, transparent 70%);
+  pointer-events: none;
+  animation: sparkle 5s linear infinite;
+}
+
+@keyframes sparkle {
+  0% {transform: translateY(0) translateX(0);}
+  50% {transform: translateY(-20px) translateX(15px);}
+  100% {transform: translateY(0) translateX(0);}
+}
+
+/* Grid & cards */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1rem;
+}
+
+.card{
+  background:white;
+  padding:1rem;
+  border-radius:10px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.06);
+  transition:transform .25s ease;
+}
+
+.card:hover{transform:translateY(-6px)}
+
+.card img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  border-radius:8px;
+}
+
+/* Countdown Styling - remove yellow tones */
+#countdown div {
+  background: linear-gradient(135deg, #ffd6ea, #ff99cc); /* pink gradient */
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  min-width: 70px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: white;
+}
+
+#countdown span {
+  font-weight: bold;
+  display: block;
+  font-size: 2.2rem;
+  text-shadow: 0 0 8px rgba(255,255,255,0.5);
+}
+
+.countdown-section h2 {
+  color: #d6418e; /* pink heading */
+  text-shadow: 0 0 4px rgba(214,65,142,0.3);
+}
+
+/* Forms */
+form{
+  background:white;
+  padding:1rem;
+  border-radius:10px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.06);
+}
+
+label{display:block;margin-bottom:.6rem}
+
+input,textarea,select{
+  width:100%;
+  padding:.6rem;
+  border:1px solid #eee;
+  border-radius:6px;
+}
+
+.btn-submit{
+  background:var(--primary-pink); /* replaced gold with pink */
+  border:none;
+  padding:.6rem 1rem;
+  border-radius:6px;
+}
+
+/* Footer */
+.footer{
+  padding:1rem;
+  text-align:center;
+  color:var(--muted);
+}
+
+.footer .hashtag{
+  color:var(--primary-pink);
+  font-weight:700;
+}
+
+/* Animations */
+.fade-up{
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+
+.fade-up.in-view{
+  opacity:1;
+  transform:none;
+}
+
+/* ============================= */
+/* OUR STORY – LETTER STYLE BOX */
+/* ============================= */
+
+.story-letter{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,248,240,0.95)),
+    var(--glitter);
+  border:1px solid rgba(255,192,203,0.35); /* replaced yellowish border with pink */
+  padding:2.2rem;
+  max-width:820px;
+  margin:2rem auto;
+  border-radius:14px;
+  box-shadow:0 14px 40px rgba(214,65,142,0.12);
+  font-family:'Playfair Display',serif;
+  line-height:1.9;
+  color:#4a2e3a;
+  position:relative;
+}
+
+.story-letter::before{
+  content:'';
+  position:absolute;
+  inset:-12px;
+  background:radial-gradient(circle at top left, rgba(255,192,203,0.18), transparent 55%); /* replaced yellowish glow with pink */
+  z-index:-1;
+  border-radius:18px;
+}
+
+.story-letter p{
+  margin-bottom:1.4rem;
+  font-size:1.1rem;
+}
+
+.story-letter .sign-off{
+  margin-top:2rem;
+  font-style:italic;
+  color:var(--primary-pink);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a,
+button {
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    color 0.15s ease;
+}
+
+a:active,
+button:active {
+  transform: scale(0.96);
+}
+
+.event-link {
+  display: block;
+  color: inherit;
+}
+
+.event-link:hover h3 {
+  color: var(--primary-pink); /* removed gold hover */
+}
+
+.event-link:active {
+  transform: scale(0.97);
+}
+
+.nav-links a {
+  position: relative;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: var(--primary-pink); /* removed gold hover */
+}
+
+.nav-links a:active {
+  transform: scale(0.92);
+}
+
+/* Responsive */
+@media (max-width:800px){
+  .nav-links{display:none}
+  .menu-toggle{display:block}
+  .hero .names{font-size:1.5rem}
+  .story-letter{padding:1.6rem}
+}
+
+@media (max-width:480px){
+  .hero{padding:2rem 0}
+  .story-letter{
+    padding:1.3rem;
+    font-size:1rem;
+  }
+}

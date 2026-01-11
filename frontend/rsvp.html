@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RSVP — Richa & Nripendra</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="nav container">
+      <div class="brand"><h1>RSVP</h1></div>
+      <div class="decor-mandala" aria-hidden="true"><img src="assets/images/mandala.svg" alt="" width="56" height="56"></div>
+      <nav class="nav-links" role="navigation" aria-label="Main Navigation">
+        <a href="index.html">Home</a>
+        <a href="story.html">Our Story</a>
+        <a href="events.html">Events</a>
+        <a href="rsvp.html">RSVP</a>
+      </nav>
+      <button class="menu-toggle">☰</button>
+    </div>
+  </header>
+
+  <main id="main" class="container fade-up">
+    <h2>RSVP</h2>
+    <form id="rsvpForm" aria-label="RSVP form">
+      <label>Name<input type="text" name="name" id="name" required></label>
+      <label>Email<input type="email" name="email" id="email" required></label>
+      <label>Phone<input type="tel" name="phone" id="phone"></label>
+      <label>Number of guests<input type="number" name="guestsCount" id="guestsCount" min="1" value="1"></label>
+      <fieldset>
+        <legend>Events attending</legend>
+        <label><input type="checkbox" name="events" value="haldi"> Haldi</label>
+        <label><input type="checkbox" name="events" value="sangeet"> Sangeet</label>
+        <label><input type="checkbox" name="events" value="wedding"> Wedding</label>
+      </fieldset>
+      <label>Message<textarea name="message" id="message" rows="4"></textarea></label>
+      <button type="submit" class="btn-submit">Submit RSVP</button>
+      <div id="rsvpMsg" role="status" aria-live="polite"></div>
+    </form>
+  </main>
+
+  <footer class="footer"><div class="container">Questions? Contact family.</div></footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('rsvpForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msgEl = document.getElementById('rsvpMsg');
+      msgEl.textContent = '';
+
+      const events = Array.from(document.querySelectorAll('input[name="events"]:checked')).map(i=>i.value);
+
+      const payload = {
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        guestsCount: parseInt(document.getElementById('guestsCount').value) || 1,
+        eventsAttending: events,
+        message: document.getElementById('message').value.trim()
+      };
+
+      // Basic client-side validation
+      if(!payload.name || !payload.email){ msgEl.textContent = 'Name and email are required.'; return; }
+
+      try{
+        const res = await fetch('/api/rsvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if(!res.ok){ const err = await res.json(); msgEl.textContent = err.errors ? err.errors.map(e=>e.msg).join(', ') : err.message || 'Submission failed'; return; }
+
+        msgEl.textContent = 'Thank you — your RSVP has been submitted.';
+        e.target.reset();
+      } catch(err){ msgEl.textContent = 'Network error; please try again later.'; }
+    });
+  </script>
+</body>
+</html>

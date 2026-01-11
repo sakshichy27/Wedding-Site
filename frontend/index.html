@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Richa & Nripendra — Wedding</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Countdown Styling */
+    .countdown-section {
+      text-align: center;
+      margin: 2rem 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .countdown-section h2 {
+      font-size: 2rem;
+      color: var(--primary-pink);
+      margin-bottom: 1rem;
+    }
+
+    #countdown {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      font-size: 1.5rem;
+      color: #333;
+    }
+
+    #countdown div {
+      background: rgba(255, 192, 203, 0.1); /* light pinkish background */
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      min-width: 70px;
+    }
+
+    #countdown span {
+      font-weight: bold;
+      display: block;
+      font-size: 2rem;
+      color: var(--primary-pink);
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="nav container">
+      <div class="brand"><h1>Richa & Nripendra</h1></div>
+
+      <nav class="nav-links" role="navigation" aria-label="Main Navigation">
+        <a href="story.html">Our Story</a>
+        <a href="events.html">Events</a>
+        <a href="rsvp.html">RSVP</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="menu-toggle" aria-expanded="false" aria-label="Menu">☰</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero glitter-bg minimal-hero">
+      <div class="container" style="display:flex;flex-direction:column;align-items:center;gap:1rem;padding:4rem 1rem;">
+
+        <!-- Decorative floating mandala -->
+<img src="assets/images/mandala.svg" alt="" class="floating-mandala" style="position:absolute;top:10%;left:5%;width:50px;opacity:0.3;">
+<img src="assets/images/mandala.svg" alt="" class="floating-mandala" style="position:absolute;top:20%;right:10%;width:70px;opacity:0.2;">
+
+        
+        <!-- Countdown Timer -->
+        <section class="countdown-section">
+          <h2>Countdown to Our Wedding</h2>
+          <div id="countdown">
+            <div><span id="days">00</span>Days</div>
+            <div><span id="hours">00</span>Hours</div>
+            <div><span id="minutes">00</span>Minutes</div>
+            <div><span id="seconds">00</span>Seconds</div>
+          </div>
+        </section>
+
+        <!-- Digital invite video -->
+        <div class="invite-video" style="width:100%;max-width:900px;border-radius:12px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.08);background:#000;">
+          <video controls playsinline preload="metadata" style="width:100%;height:auto;display:block">
+            <source src="assets/images/RN FINAL.mp4" type="video/mp4">
+            Your browser does not support the video tag. <a href="assets/images/RN FINAL.mp4">Download the invitation</a>.
+          </video>
+        </div>
+
+        <div style="margin-top:.8rem;text-align:center;">
+          <a class="btn secondary download-btn" href="assets/images/RN%20BRIDE.pdf" download="Richa-Nripendra-Invitation.pdf" target="_blank" rel="noopener" aria-label="Download PDF wedding invitation">Download PDF Invitation</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer glitter-bg">
+    <div class="decor-mandala footer-mandala" aria-hidden="true"><img src="assets/images/mandala.svg" alt="" width="96" height="96"></div>
+    <div class="container">Use <span class="hashtag">#nripendragotrich</span> on Instagram</div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    function startCountdown(elementId) {
+      const countdownElement = document.getElementById(elementId);
+      const targetDate = new Date("February 8, 2026 00:00:00").getTime();
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {
+          countdownElement.innerHTML = "<h2>The Wedding Day is Here! 🎉</h2>";
+          clearInterval(interval);
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").textContent = days.toString().padStart(2, "0");
+        document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
+        document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
+        document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
+      }
+
+      updateCountdown();
+      const interval = setInterval(updateCountdown, 1000);
+    }
+
+    startCountdown('countdown');
+  </script>
+</body>
+</html>

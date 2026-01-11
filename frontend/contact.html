@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact — Richa & Nripendra</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="nav container">
+      <div class="brand"><h1>Contact</h1></div>
+      <div class="decor-mandala" aria-hidden="true"><img src="assets/images/mandala.svg" alt="" width="56" height="56"></div>
+      <nav class="nav-links" role="navigation" aria-label="Main Navigation">
+        <a href="index.html">Home</a>
+        <a href="story.html">Our Story</a>
+        <a href="events.html">Events</a>
+        <a href="rsvp.html">RSVP</a>
+      </nav>
+      <button class="menu-toggle">☰</button>
+    </div>
+  </header>
+
+  <main id="main" class="container fade-up">
+    <h2>Contact the Families</h2>
+    <p>If you need assistance, reach out to:</p>
+    <ul>
+      <li>Groom's family: +91 785887306</li>
+      <li>Bride's family: +91 7858873096</li>
+    </ul>
+
+    <h3>Send us a message</h3>
+    <form id="contactForm">
+      <label>Name<input type="text" id="cname" required></label>
+      <label>Email<input type="email" id="cemail" required></label>
+      <label>Message<textarea id="cmessage" rows="4" required></textarea></label>
+      <button type="submit" class="btn-submit">Send Message</button>
+      <div id="contactMsg" role="status" aria-live="polite"></div>
+    </form>
+  </main>
+
+  <footer class="footer"><div class="container">THANK YOU</div></footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msgEl = document.getElementById('contactMsg'); msgEl.textContent='';
+      const payload = { name: document.getElementById('cname').value.trim(), email: document.getElementById('cemail').value.trim(), message: document.getElementById('cmessage').value.trim() };
+      if(!payload.name || !payload.email || !payload.message){ msgEl.textContent='Please fill all fields'; return; }
+      try{
+        const res = await fetch('/api/contact', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload)});
+        if(!res.ok){ const err = await res.json(); msgEl.textContent = err.errors ? err.errors.map(e=>e.msg).join(', ') : err.message || 'Failed'; return; }
+        msgEl.textContent = 'Message sent — thank you.'; e.target.reset();
+      }catch(err){ msgEl.textContent='Network error'; }
+    });
+  </script>
+</body>
+</html>
